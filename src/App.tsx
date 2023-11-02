@@ -1,12 +1,7 @@
-import './App.css'
+import "./App.css";
 
 function App() {
-
-  return (
-    <>
-      Welcome to Edittube
-    </>
-  )
+  return <>Hello World</>;
 }
 
-export default App
+export default App;
