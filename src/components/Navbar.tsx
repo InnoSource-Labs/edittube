@@ -1,5 +1,4 @@
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
 import {
   AppBar,
   Toolbar,
@@ -10,8 +9,14 @@ import {
   CssBaseline,
 } from "@mui/material";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = (): ReactNode => {
+
+  const { loginWithRedirect } = useAuth0();
+  const { logout } = useAuth0();
+  const { isAuthenticated } = useAuth0();
+
   return (
     <section>
       <CssBaseline />
@@ -32,22 +37,17 @@ const Navbar = (): ReactNode => {
             Edittube
           </Typography>
           <Stack direction="row" spacing={2}>
-            <Button color="inherit">
-              <Link
-                to="/signin"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                Signin
-              </Link>{" "}
-            </Button>
-            <Button color="inherit">
-              <Link
-                to="/signup"
-                style={{ textDecoration: "none", color: "inherit" }}
-              >
-                Signup
-              </Link>{" "}
-            </Button>
+            {isAuthenticated ?
+              <Button color="inherit" onClick={() => logout()}>
+                Logout
+                {" "}
+              </Button>
+              :
+              <Button color="inherit" onClick={() => loginWithRedirect()}>
+                Signin/Signup
+                {" "}
+              </Button>
+            }
           </Stack>
         </Toolbar>
       </AppBar>

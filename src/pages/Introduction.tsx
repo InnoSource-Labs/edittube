@@ -2,6 +2,7 @@ import { ReactNode } from "react"
 import Navbar from "../components/Navbar"
 
 const Introduction = (): ReactNode => {
+
     return (
         <div>
             <Navbar />
