@@ -1,13 +1,13 @@
 import { ReactNode } from "react";
 import Navbar from "../components/Navbar";
 
-const Introduction = (): ReactNode => {
+const Home = (): ReactNode => {
   return (
     <div>
       <Navbar />
-      Welcome to edittube
+      Welcome to home page.
     </div>
   );
 };
 
-export default Introduction;
+export default Home;
