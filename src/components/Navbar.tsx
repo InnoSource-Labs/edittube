@@ -12,7 +12,6 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = (): ReactNode => {
-
   const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
 
   return (
@@ -35,17 +34,15 @@ const Navbar = (): ReactNode => {
             Edittube
           </Typography>
           <Stack direction="row" spacing={2}>
-            {isAuthenticated ?
+            {isAuthenticated ? (
               <Button color="inherit" onClick={() => logout()}>
                 Logout
-                {" "}
               </Button>
-              :
+            ) : (
               <Button color="inherit" onClick={() => loginWithRedirect()}>
                 Signin/Signup
-                {" "}
               </Button>
-            }
+            )}
           </Stack>
         </Toolbar>
       </AppBar>
