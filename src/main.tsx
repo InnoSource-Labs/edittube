@@ -1,16 +1,17 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
-import App from "./App.tsx";
-import "./index.css";
 import { Auth0Provider } from "@auth0/auth0-react";
+import App from "./App.tsx";
+import enviroment from "./enviroment.ts";
 
 ReactDOM.createRoot(document.getElementById("root")!).render(
   <React.StrictMode>
     <Auth0Provider
-      domain={import.meta.env.VITE_AUTH_DOMAIN}
-      clientId={import.meta.env.VITE_AUTH_CLIENTID}
+      domain={enviroment.auth_domin}
+      clientId={enviroment.auth_clinent_id}
       authorizationParams={{
-        redirect_uri: `${window.location.origin}/home`,
+        redirect_uri: window.location.origin,
+        audience: enviroment.api_identifier,
       }}
     >
       <App />

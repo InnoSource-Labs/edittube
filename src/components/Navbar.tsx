@@ -12,7 +12,7 @@ import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = (): ReactNode => {
-  const { loginWithRedirect, logout, isAuthenticated } = useAuth0();
+  const { loginWithPopup, logout, isAuthenticated } = useAuth0();
 
   return (
     <section>
@@ -39,7 +39,7 @@ const Navbar = (): ReactNode => {
                 Logout
               </Button>
             ) : (
-              <Button color="inherit" onClick={() => loginWithRedirect()}>
+              <Button color="inherit" onClick={() => loginWithPopup()}>
                 Signin/Signup
               </Button>
             )}
