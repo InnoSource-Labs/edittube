@@ -1,3 +1,8 @@
+export interface editorsInterface {
+  uid: string;
+  email: string;
+}
+
 export interface WorkspaceInterface {
   id: string;
   createdAt: string;
@@ -5,5 +10,5 @@ export interface WorkspaceInterface {
   creatorId: string;
   clientId: string;
   clientSecret: string;
-  editorIds: string[];
+  editorIds: editorsInterface[];
 }
