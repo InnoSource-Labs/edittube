@@ -1,7 +1,7 @@
 export interface VideoInterface {
   id: string;
-  created_at: number;
-  updated_at: number;
+  createdAt: string;
+  updatedAt: string;
   workspaceId: string;
   title: string;
   description: string;

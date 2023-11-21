@@ -1,9 +1,10 @@
 export interface UserInterface {
-  id: string;
-  created_at: number;
-  updated_at: number;
+  uid: string;
+  createdAt: string;
+  updatedAt: string;
   name: string;
   email: string;
-  email_verified: boolean;
-  role: "creator" | "editor";
+  emailVerified: boolean;
+  nickname?: string;
+  picture?: string;
 }
