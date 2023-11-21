@@ -1,7 +1,7 @@
 export interface WorkspaceInterface {
   id: string;
-  created_at: number;
-  updated_at: number;
+  createdAt: string;
+  updatedAt: string;
   creatorId: string;
   clientId: string;
   clientSecret: string;
