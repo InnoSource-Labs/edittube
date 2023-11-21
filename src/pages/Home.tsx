@@ -1,23 +1,90 @@
-import { Button } from "@mui/material";
+import { FormControl, MenuItem, Select, SelectChangeEvent } from "@mui/material";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import { getUser } from "../actions/users";
-import { useAuth0 } from "@auth0/auth0-react";
 
 const Home = (): ReactNode => {
-  const { getAccessTokenSilently } = useAuth0();
+
+  // const [workspaces, setWorkspaces] = useState([]);
+
+  const workspaces = [
+    {
+      name: "Workspace 1",
+      role: "editor",
+      id: "1"
+    },
+    {
+      name: "Workspace 2",
+      role: "creator",
+      id: "2"
+    },
+    {
+      name: "Workspace 3",
+      role: "creator",
+      id: "3"
+    },
+    {
+      name: "Workspace 4",
+      role: "editor",
+      id: "4"
+    },
+    {
+      name: "Workspace 5",
+      role: "editor",
+      id: "5"
+    }
+  ]
+
+  const handleChange = (e: SelectChangeEvent<number>) => {
+    console.log(e)
+  }
 
   return (
-    <div className="flex flex-col justify-center items-center">
-      <p>Welcome to home page.</p>
-      <Link to="/">Goto Root</Link>
-      <Button
-        variant="contained"
-        onClick={async () => getUser(await getAccessTokenSilently())}
-      >
-        Get User With Token
-      </Button>
-    </div>
+    <div>
+      <div className="md:w-[80%] w-[95%] m-auto font-sans">
+        <div className='flex justify-center items-center flex-col mb-8'>
+          <Link to="/workspace/new">
+            <button className='bg-[#1687A7] text-white p-2 rounded-md text-md hover:bg-[#176b87ba] transition'>Create new workspace</button>
+          </Link>
+          <div className="inline-flex items-center justify-center w-full">
+            <hr className="w-64 h-px my-6 border-0 bg-gray-700" />
+            <span className="absolute px-3 font-medium text-gray-900 -translate-x-1/2 bg-white left-1/2 ">or</span>
+          </div>
+          <div className="text-center">
+            Contact a creator to add you in a WorkSpace
+          </div>
+        </div>
+        {workspaces.length !== 0 &&
+          <div className="mb-6">
+            <div className="mb-2 font-sans font-bold md:text-2xl text-lg text-center flex justify-between items-center">
+              <div>Your WorkSpaces</div>
+              <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
+                <Select
+                  value={1}
+                  onChange={handleChange}
+                  displayEmpty
+                  inputProps={{ 'aria-label': 'Without label' }}
+                >
+                  <MenuItem value={1}>All</MenuItem>
+                  <MenuItem value={2}>Creator</MenuItem>
+                  <MenuItem value={3}>Editor</MenuItem>
+                </Select>
+              </FormControl>
+            </div>
+            <hr className="h-[2px] bg-gray-700" />
+            {workspaces.map((workspace, index) => {
+              return (
+                <Link to={`/workspace/${workspace.id}`}>
+                  <div key={index} className="flex items-center justify-between text-center text-lg font-semibold my-4  h-20 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:bg-gray-200 opacity-90 transition duration-300 rounded">
+                    <span>{workspace.name}</span>
+                    <span className="w-20">{workspace.role.toUpperCase()}</span>
+                  </div>
+                </Link>
+              )
+            })}
+          </div>
+        }
+      </div>
+    </div >
   );
 };
 

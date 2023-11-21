@@ -15,10 +15,10 @@ const Navbar = (): ReactNode => {
   const { loginWithPopup, logout, isAuthenticated } = useAuth0();
 
   return (
-    <section>
+    <section className="mb-4">
       <CssBaseline />
       <AppBar
-        sx={{ backgroundColor: "#3F72AF", color: "F9F7F7" }}
+        sx={{ backgroundColor: "#276678" }}
         position="static"
       >
         <Toolbar>
