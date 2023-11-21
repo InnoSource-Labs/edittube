@@ -1,10 +1,12 @@
-import { useAuth0 } from "@auth0/auth0-react";
 import { Navigate } from "react-router-dom";
+import { useUserAuthContext } from "../providers/UserAuthProvider";
 
 const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
-  const { isAuthenticated, isLoading } = useAuth0();
+  const { isLoading, isAuthenticated, error } = useUserAuthContext();
 
-  return !isLoading && isAuthenticated ? (
+  return isLoading ? (
+    <></>
+  ) : !error && isAuthenticated ? (
     children
   ) : (
     <Navigate replace to={{ pathname: "/" }} />

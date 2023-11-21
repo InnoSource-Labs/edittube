@@ -9,10 +9,10 @@ import {
   CssBaseline,
 } from "@mui/material";
 import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
-import { useAuth0 } from "@auth0/auth0-react";
+import { useUserAuthContext } from "../providers/UserAuthProvider";
 
 const Navbar = (): ReactNode => {
-  const { loginWithPopup, logout, isAuthenticated } = useAuth0();
+  const { login, logout, isAuthenticated } = useUserAuthContext();
 
   return (
     <section className="mb-4">
@@ -35,11 +35,11 @@ const Navbar = (): ReactNode => {
           </Typography>
           <Stack direction="row" spacing={2}>
             {isAuthenticated ? (
-              <Button color="inherit" onClick={() => logout()}>
+              <Button color="inherit" onClick={logout}>
                 Logout
               </Button>
             ) : (
-              <Button color="inherit" onClick={() => loginWithPopup()}>
+              <Button color="inherit" onClick={login}>
                 Signin/Signup
               </Button>
             )}
