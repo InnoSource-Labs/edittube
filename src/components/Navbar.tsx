@@ -17,10 +17,7 @@ const Navbar = (): ReactNode => {
   return (
     <section className="mb-4 sticky top-0 z-50">
       <CssBaseline />
-      <AppBar
-        sx={{ backgroundColor: "#276678" }}
-        position="static"
-      >
+      <AppBar sx={{ backgroundColor: "#276678" }} position="static">
         <Toolbar>
           <IconButton
             size="large"
