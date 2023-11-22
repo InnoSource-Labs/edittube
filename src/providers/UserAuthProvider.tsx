@@ -50,7 +50,7 @@ export const UserAuthProvider: React.FC<ContextProviderProps> = ({
         if (auth0User?.sub) {
           const token = await getAccessTokenSilently();
           const res = await axios.post(
-            `${enviroment.server_url}/users/logedin`,
+            `${enviroment.server_url}/users/loggedin`,
             {
               uid: auth0User.sub.split("|")[1],
               name: auth0User.name,
