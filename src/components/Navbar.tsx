@@ -15,7 +15,7 @@ const Navbar = (): ReactNode => {
   const { login, logout, isAuthenticated } = useUserAuthContext();
 
   return (
-    <section className="mb-4">
+    <section className="mb-4 sticky top-0 z-50">
       <CssBaseline />
       <AppBar
         sx={{ backgroundColor: "#276678" }}

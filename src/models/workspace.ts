@@ -1,5 +1,6 @@
 export interface WorkspaceInterface {
-  id: string;
+  _id: string;
+  name: string;
   createdAt: string;
   updatedAt: string;
   creatorId: string;
