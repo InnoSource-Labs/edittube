@@ -1,3 +1,5 @@
+export type WorkspaceFilters = "all" | "creator" | "editor";
+
 export interface editorsInterface {
   uid: string;
   email: string;
@@ -9,7 +11,8 @@ interface WorkspaceSecrets {
 }
 
 interface WorkspaceCommon {
-  id: string;
+  _id: string;
+  name: string;
   createdAt: string;
   updatedAt: string;
   creatorId: string;
