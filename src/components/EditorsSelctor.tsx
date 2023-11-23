@@ -222,7 +222,7 @@ const EditorsSelector: React.FC<Props> = ({ intialVal, onValChange }) => {
           {value.map((option: editorsInterface, index: number) => (
             <StyledTag label={option.email} {...getTagProps({ index })} />
           ))}
-          <input {...getInputProps()} />
+          <input {...getInputProps()} placeholder="ex: jhon.doe@gmail.com" />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (

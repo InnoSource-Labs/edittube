@@ -1,4 +1,4 @@
-import { InputLabel, TextField } from "@mui/material";
+import { TextField } from "@mui/material";
 import { ReactNode } from "react";
 import LoadingButton from "@mui/lab/LoadingButton";
 import AddBoxIcon from "@mui/icons-material/AddBox";
@@ -29,11 +29,10 @@ const CreateNewWorkSpace = (): ReactNode => {
           Create new workspace
         </div>
         <div className="mb-4 w-full">
-          <InputLabel htmlFor="name">Name: </InputLabel>
           <TextField
             required
             id="outlined-required name"
-            label="Required"
+            label="Name"
             size="small"
             sx={{ width: "100%" }}
             value={name}
@@ -43,16 +42,19 @@ const CreateNewWorkSpace = (): ReactNode => {
           />
         </div>
         <div className="text-sm text-blue-500 my-2">
-          <a href="https://support.google.com/cloud/answer/6158849?hl=en">
-            Click here and follow the steps to generate Client ID and Secret
+          <a
+            href="https://support.google.com/cloud/answer/6158849?hl=en"
+            target="_blank"
+          >
+            Follow the steps provided by Google to generate Client ID and
+            Secret.
           </a>
         </div>
         <div className="mb-4 w-full">
-          <InputLabel htmlFor="clientId">Client ID: </InputLabel>
           <TextField
             required
             id="outlined-required clientId"
-            label="Required"
+            label="Client ID"
             size="small"
             sx={{ width: "100%" }}
             value={clientId}
@@ -62,11 +64,10 @@ const CreateNewWorkSpace = (): ReactNode => {
           />
         </div>
         <div className="mb-4 w-full">
-          <InputLabel htmlFor="clientsecret">Client Secret: </InputLabel>
           <TextField
             required
             id="outlined-required clientsecret"
-            label="Required"
+            label="Client Secret"
             size="small"
             sx={{ width: "100%" }}
             value={clientSecret}

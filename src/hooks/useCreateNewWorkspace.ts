@@ -24,7 +24,7 @@ export const useCreateNewWorkspace = () => {
     try {
       const token = await getAccessToken();
       const res = await axios.post(
-        `${enviroment.server_url}/workspaces/new`,
+        `${enviroment.server_url}/workspaces`,
         {
           name,
           clientId,
