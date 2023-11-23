@@ -14,8 +14,9 @@ import { InputLabel } from "@mui/material";
 
 const Root = styled("div")(
   ({ theme }) => `
-  color: ${theme.palette.mode === "dark" ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,.85)"
-    };
+  color: ${
+    theme.palette.mode === "dark" ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,.85)"
+  };
   font-size: 14px;
   width:100%;
   margin-bottom:20px;
@@ -24,7 +25,9 @@ const Root = styled("div")(
 
 const InputWrapper = styled("div")(
   ({ theme }) => `
-  border: 1px solid ${theme.palette.mode === "dark" ? "#434343" : "rgb(0 0 0 / 23%)"};
+  border: 1px solid ${
+    theme.palette.mode === "dark" ? "#434343" : "rgb(0 0 0 / 23%)"
+  };
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
   border-radius: 4px;
   padding: 1px;
@@ -42,9 +45,10 @@ const InputWrapper = styled("div")(
 
   & input {
     background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
-    color: ${theme.palette.mode === "dark"
-      ? "rgba(255,255,255,0.65)"
-      : "rgba(0,0,0,.85)"
+    color: ${
+      theme.palette.mode === "dark"
+        ? "rgba(255,255,255,0.65)"
+        : "rgba(0,0,0,.85)"
     };
     height: 38px;;
     box-sizing: border-box;
@@ -80,8 +84,9 @@ const StyledTag = styled(Tag)<TagProps>(
   height: 24px;
   margin: 2px;
   line-height: 22px;
-  background-color: ${theme.palette.mode === "dark" ? "rgba(255,255,255,0.08)" : "#fafafa"
-    };
+  background-color: ${
+    theme.palette.mode === "dark" ? "rgba(255,255,255,0.08)" : "#fafafa"
+  };
   border: 1px solid ${theme.palette.mode === "dark" ? "#303030" : "#e8e8e8"};
   border-radius: 2px;
   box-sizing: content-box;
