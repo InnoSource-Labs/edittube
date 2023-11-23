@@ -10,6 +10,7 @@ import { editorsInterface } from "../models/workspace";
 import { useState } from "react";
 import enviroment from "../enviroment";
 import * as Realm from "realm-web";
+import { InputLabel } from "@mui/material";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -17,19 +18,16 @@ const Root = styled("div")(
     theme.palette.mode === "dark" ? "rgba(255,255,255,0.65)" : "rgba(0,0,0,.85)"
   };
   font-size: 14px;
+  width:100%;
+  margin-bottom:20px;
 `,
 );
 
-const Label = styled("label")`
-  padding: 0 0 4px;
-  line-height: 1.5;
-  display: block;
-`;
-
 const InputWrapper = styled("div")(
   ({ theme }) => `
-  width: 300px;
-  border: 1px solid ${theme.palette.mode === "dark" ? "#434343" : "#d9d9d9"};
+  border: 1px solid ${
+    theme.palette.mode === "dark" ? "#434343" : "rgb(0 0 0 / 23%)"
+  };
   background-color: ${theme.palette.mode === "dark" ? "#141414" : "#fff"};
   border-radius: 4px;
   padding: 1px;
@@ -52,7 +50,7 @@ const InputWrapper = styled("div")(
         ? "rgba(255,255,255,0.65)"
         : "rgba(0,0,0,.85)"
     };
-    height: 30px;
+    height: 38px;;
     box-sizing: border-box;
     padding: 4px 6px;
     width: 0;
@@ -167,7 +165,7 @@ interface Props {
   onValChange: (val: editorsInterface[]) => void;
 }
 
-const EditorsSelctor: React.FC<Props> = ({ intialVal, onValChange }) => {
+const EditorsSelector: React.FC<Props> = ({ intialVal, onValChange }) => {
   const [options, setOptions] = useState<editorsInterface[]>([]);
 
   async function onInputChange(_: React.SyntheticEvent, value: string) {
@@ -198,7 +196,6 @@ const EditorsSelctor: React.FC<Props> = ({ intialVal, onValChange }) => {
 
   const {
     getRootProps,
-    getInputLabelProps,
     getInputProps,
     getTagProps,
     getListboxProps,
@@ -220,12 +217,12 @@ const EditorsSelctor: React.FC<Props> = ({ intialVal, onValChange }) => {
   return (
     <Root>
       <div {...getRootProps()}>
-        <Label {...getInputLabelProps()}>Email</Label>
+        <InputLabel>Add editors with email: </InputLabel>
         <InputWrapper ref={setAnchorEl} className={focused ? "focused" : ""}>
           {value.map((option: editorsInterface, index: number) => (
             <StyledTag label={option.email} {...getTagProps({ index })} />
           ))}
-          <input {...getInputProps()} />
+          <input {...getInputProps()} placeholder="ex: jhon.doe@gmail.com" />
         </InputWrapper>
       </div>
       {groupedOptions.length > 0 ? (
@@ -242,4 +239,4 @@ const EditorsSelctor: React.FC<Props> = ({ intialVal, onValChange }) => {
   );
 };
 
-export default EditorsSelctor;
+export default EditorsSelector;

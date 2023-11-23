@@ -51,15 +51,7 @@ export const UserAuthProvider: React.FC<ContextProviderProps> = ({
           const token = await getAccessTokenSilently();
           const res = await axios.post(
             `${enviroment.server_url}/users/loggedin`,
-            {
-              uid: auth0User.sub.split("|")[1],
-              name: auth0User.name,
-              email: auth0User.email,
-              emailVerified: auth0User.email_verified,
-              updatedAt: auth0User.updatedAt,
-              nickname: auth0User.nickname,
-              picture: auth0User.picture,
-            },
+            auth0User,
             {
               headers: { Authorization: `Bearer ${token}` },
             },
