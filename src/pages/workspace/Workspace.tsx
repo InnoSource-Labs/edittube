@@ -4,18 +4,16 @@ import { VideoFilters } from "../../models/video";
 import InfiniteScroll from "react-infinite-scroll-component";
 import { CircularProgress, FormControl, Select, MenuItem } from "@mui/material";
 import { useWorkspace } from "../../hooks/useWorkspace";
+import { useParams } from "react-router-dom";
+import { useVideos } from "../../hooks/useVideos";
 
 const Workspace = (): React.ReactNode => {
-  const {
-    workspace,
-    filter,
-    setFilter,
-    videos,
-    getMoreVideos,
-    id,
-    totalPage,
-    currentPage,
-  } = useWorkspace();
+  const id = useParams().id;
+
+  const { workspace } = useWorkspace(id);
+
+  const { videos, filter, setFilter, getMoreVideos, totalPage, currentPage } =
+    useVideos(id);
 
   return (
     <div
@@ -50,7 +48,7 @@ const Workspace = (): React.ReactNode => {
           </FormControl>
         </div>
         <hr className="h-[2px] bg-gray-700 w-full" />
-        {videos.length ? (
+        {videos?.length ? (
           <div className="w-full">
             <InfiniteScroll
               dataLength={videos.length}
