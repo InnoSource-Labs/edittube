@@ -1,5 +1,7 @@
+type ViedoStatus = "pending" | "approved" | "rejected";
+
 export interface VideoInterface {
-  id: string;
+  _id: string;
   createdAt: string;
   updatedAt: string;
   workspaceId: string;
@@ -7,5 +9,7 @@ export interface VideoInterface {
   description: string;
   url: string;
   uploadedBy: string;
-  status: "pending" | "approved" | "rejected";
+  status: ViedoStatus;
 }
+
+export type VideoFilters = ViedoStatus | "all";

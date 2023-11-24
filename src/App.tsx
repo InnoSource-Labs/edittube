@@ -6,6 +6,7 @@ import Home from "./pages/Home";
 import "./index.css";
 import CreateNewWorkSpace from "./pages/workspace/CreateNewWorkspace";
 import { Toaster } from "react-hot-toast";
+import Workspace from "./pages/workspace/Workspace";
 
 function App() {
   return (
@@ -27,6 +28,14 @@ function App() {
           element={
             <PrivateRoute>
               <CreateNewWorkSpace />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/workspace/:id"
+          element={
+            <PrivateRoute>
+              <Workspace />
             </PrivateRoute>
           }
         />

@@ -35,25 +35,23 @@ const Home = (): ReactNode => {
             Contact a creator to add you in a WorkSpace
           </div>
         </div>
-        {workspaces.length ? (
-          <div className="mb-6">
-            <div className="mb-2 font-sans font-bold md:text-2xl text-lg text-center flex justify-between items-center">
-              <div>Your WorkSpaces</div>
-              <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
-                <Select
-                  value={filter}
-                  onChange={(e) =>
-                    setFilter(e.target.value as WorkspaceFilters)
-                  }
-                  inputProps={{ "aria-label": "Without label" }}
-                >
-                  <MenuItem value={"all"}>All</MenuItem>
-                  <MenuItem value={"creator"}>Creator</MenuItem>
-                  <MenuItem value={"editor"}>Editor</MenuItem>
-                </Select>
-              </FormControl>
-            </div>
-            <hr className="h-[2px] bg-gray-700" />
+        <div className="mb-6">
+          <div className="mb-2 font-sans font-bold md:text-2xl text-lg text-center flex justify-between items-center">
+            <div>Your WorkSpaces</div>
+            <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
+              <Select
+                value={filter}
+                onChange={(e) => setFilter(e.target.value as WorkspaceFilters)}
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                <MenuItem value={"all"}>All</MenuItem>
+                <MenuItem value={"creator"}>Creator</MenuItem>
+                <MenuItem value={"editor"}>Editor</MenuItem>
+              </Select>
+            </FormControl>
+          </div>
+          <hr className="h-[2px] bg-gray-700" />
+          {workspaces.length ? (
             <InfiniteScroll
               dataLength={workspaces.length}
               next={getMoreWorkspaces}
@@ -72,7 +70,7 @@ const Home = (): ReactNode => {
                 return (
                   <Link to={`/workspace/${workspace._id}`} key={index}>
                     <div className="flex items-center justify-between text-center text-lg font-semibold my-4  h-20 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:bg-gray-200 opacity-90 transition duration-300 rounded">
-                      <span>{workspace.name}</span>
+                      <span className="truncate">{workspace.name}</span>
                       <span className="w-20">
                         {workspace.role.toUpperCase()}
                       </span>
@@ -81,12 +79,12 @@ const Home = (): ReactNode => {
                 );
               })}
             </InfiniteScroll>
-          </div>
-        ) : (
-          <div className="text-center font-bold text-xl py-8">
-            Nothing to show here!
-          </div>
-        )}
+          ) : (
+            <div className="text-center font-bold text-xl py-8">
+              Nothing to show here!
+            </div>
+          )}
+        </div>
       </div>
     </div>
   );
