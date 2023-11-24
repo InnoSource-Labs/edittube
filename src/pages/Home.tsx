@@ -41,9 +41,7 @@ const Home = (): ReactNode => {
             <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
               <Select
                 value={filter}
-                onChange={(e) =>
-                  setFilter(e.target.value as WorkspaceFilters)
-                }
+                onChange={(e) => setFilter(e.target.value as WorkspaceFilters)}
                 inputProps={{ "aria-label": "Without label" }}
               >
                 <MenuItem value={"all"}>All</MenuItem>
