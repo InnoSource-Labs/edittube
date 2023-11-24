@@ -1,5 +1,5 @@
 export interface VideoInterface {
-  id: string;
+  _id: string;
   createdAt: string;
   updatedAt: string;
   workspaceId: string;
@@ -9,3 +9,5 @@ export interface VideoInterface {
   uploadedBy: string;
   status: "pending" | "approved" | "rejected";
 }
+
+export type VideoFilters = "pending" | "approved" | "rejected" | "all";
