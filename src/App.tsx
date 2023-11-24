@@ -7,6 +7,7 @@ import "./index.css";
 import CreateNewWorkSpace from "./pages/workspace/CreateNewWorkspace";
 import { Toaster } from "react-hot-toast";
 import Workspace from "./pages/workspace/Workspace";
+import UploadNewVideo from "./pages/video/UploadNewVideo";
 
 function App() {
   return (
@@ -36,6 +37,14 @@ function App() {
           element={
             <PrivateRoute>
               <Workspace />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/workspace/:id/upload"
+          element={
+            <PrivateRoute>
+              <UploadNewVideo />
             </PrivateRoute>
           }
         />

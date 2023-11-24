@@ -8,6 +8,7 @@ export interface VideoInterface {
   title: string;
   description: string;
   url: string;
+  publicId: string;
   uploadedBy: string;
   status: ViedoStatus;
 }
