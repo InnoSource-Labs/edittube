@@ -1,20 +1,7 @@
 import React from "react";
 import { useUploadNewVideo } from "../../hooks/useUploadNewVideo";
-import { Button, TextField, styled } from "@mui/material";
-import { LoadingButton } from "@mui/lab";
-import CloudUploadIcon from "@mui/icons-material/CloudUpload";
-
-const VisuallyHiddenInput = styled("input")({
-  clip: "rect(0 0 0 0)",
-  clipPath: "inset(50%)",
-  height: 1,
-  overflow: "hidden",
-  position: "absolute",
-  bottom: 0,
-  left: 0,
-  whiteSpace: "nowrap",
-  width: 1,
-});
+import { TextField } from "@mui/material";
+import { LoadingButton } from "@mui/lab"
 
 const UploadNewVideo = (): React.ReactNode => {
   const { handleSubmit, title, setTitle, loading, setVideo, desc, setDesc } =
@@ -52,21 +39,12 @@ const UploadNewVideo = (): React.ReactNode => {
           }}
           sx={{ width: "100%" }}
         />
-        <Button
-          component="label"
-          variant="contained"
-          startIcon={<CloudUploadIcon />}
-          sx={{ marginY: "20px" }}
-        >
-          Upload video
-          <VisuallyHiddenInput
-            accept="video/*"
-            type="file"
-            onChange={(e) => {
-              e.target.files && setVideo(e.target.files[0]);
-            }}
-          />
-        </Button>
+        <div className="my-4 border border-gray-300 w-full h-[40px] flex items-center p-4 gap-4 rounded">
+          <label htmlFor="video-selector">Video* : </label>
+          <input type="file" id="video-selector" accept="video/*" required onChange={(e) => {
+            e.target.files && setVideo(e.target.files[0])
+          }} />
+        </div>
         <LoadingButton
           loading={loading}
           loadingPosition="center"
