@@ -1,8 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { VideoFilters } from "../../models/video";
-import InfiniteScroll from "react-infinite-scroll-component";
-import { CircularProgress, FormControl, Select, MenuItem } from "@mui/material";
+import { FormControl, Select, MenuItem, Button } from "@mui/material";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { useParams } from "react-router-dom";
 import { useVideos } from "../../hooks/useVideos";
@@ -12,8 +11,7 @@ const Workspace = (): React.ReactNode => {
 
   const { workspace } = useWorkspace(id);
 
-  const { videos, filter, setFilter, getMoreVideos, totalPage, currentPage } =
-    useVideos(id);
+  const { videos, filter, totalPage, page, setSearchQuery } = useVideos(id);
 
   return (
     <div
@@ -37,7 +35,13 @@ const Workspace = (): React.ReactNode => {
           <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
             <Select
               value={filter}
-              onChange={(e) => setFilter(e.target.value as VideoFilters)}
+              onChange={(e) =>
+                setSearchQuery((query) => {
+                  query.set("filter", e.target.value as VideoFilters);
+                  query.set("page", "1");
+                  return query;
+                })
+              }
               inputProps={{ "aria-label": "Without label" }}
             >
               <MenuItem value={"all"}>All</MenuItem>
@@ -50,31 +54,42 @@ const Workspace = (): React.ReactNode => {
         <hr className="h-[2px] bg-gray-700 w-full" />
         {videos?.length ? (
           <div className="w-full">
-            <InfiniteScroll
-              dataLength={videos.length}
-              next={getMoreVideos}
-              hasMore={totalPage > currentPage}
-              loader={
-                <div className="flex justify-center">
-                  <CircularProgress />
-                </div>
-              }
-              scrollThreshold={1}
-              style={{
-                overflow: "visible",
-              }}
-            >
-              {videos.map((video, index) => {
-                return (
-                  <Link to={`/workspace/${id}/${video._id}`} key={index}>
-                    <div className="flex items-center justify-between text-center text-lg font-semibold my-4  h-20 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:bg-gray-200 opacity-90 transition duration-300 rounded">
-                      <span className="truncate">{video.title}</span>
-                      <span className="w-20">{video.status.toUpperCase()}</span>
-                    </div>
-                  </Link>
-                );
-              })}
-            </InfiniteScroll>
+            {videos.map((video, index) => {
+              return (
+                <Link to={`/workspace/${id}/${video._id}`} key={index}>
+                  <div className="flex items-center justify-between text-center text-lg font-semibold my-4  h-20 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:bg-gray-200 opacity-90 transition duration-300 rounded">
+                    <span className="truncate">{video.title}</span>
+                    <span className="w-20">{video.status.toUpperCase()}</span>
+                  </div>
+                </Link>
+              );
+            })}
+            <div className="flex items-center justify-between my-4">
+              <Button
+                variant="contained"
+                disabled={page === 1}
+                onClick={() =>
+                  setSearchQuery((query) => {
+                    query.set("page", (page - 1).toString() as string);
+                    return query;
+                  })
+                }
+              >
+                Previous
+              </Button>
+              <Button
+                variant="contained"
+                disabled={page === totalPage}
+                onClick={() =>
+                  setSearchQuery((query) => {
+                    query.set("page", (page + 1).toString() as string);
+                    return query;
+                  })
+                }
+              >
+                Next
+              </Button>
+            </div>
           </div>
         ) : (
           <div className="text-center font-bold text-xl py-8">
