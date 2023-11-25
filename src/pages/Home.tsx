@@ -1,20 +1,12 @@
-import { FormControl, MenuItem, Select } from "@mui/material";
+import { Button, FormControl, MenuItem, Select } from "@mui/material";
 import { ReactNode } from "react";
 import { Link } from "react-router-dom";
-import InfiniteScroll from "react-infinite-scroll-component";
-import CircularProgress from "@mui/material/CircularProgress";
 import { WorkspaceFilters } from "../models/workspace";
 import { useWorkspaces } from "../hooks/useWorkspaces";
 
 const Home = (): ReactNode => {
-  const {
-    workspaces,
-    currentPage,
-    totalPage,
-    filter,
-    setFilter,
-    getMoreWorkspaces,
-  } = useWorkspaces();
+  const { workspaces, filter, setSearchQuery, page, totalPage } =
+    useWorkspaces();
 
   return (
     <div>
@@ -41,7 +33,13 @@ const Home = (): ReactNode => {
             <FormControl sx={{ m: 1, minWidth: 100 }} size="small">
               <Select
                 value={filter}
-                onChange={(e) => setFilter(e.target.value as WorkspaceFilters)}
+                onChange={(e) =>
+                  setSearchQuery((query) => {
+                    query.set("filter", e.target.value as WorkspaceFilters);
+                    query.set("page", "1");
+                    return query;
+                  })
+                }
                 inputProps={{ "aria-label": "Without label" }}
               >
                 <MenuItem value={"all"}>All</MenuItem>
@@ -52,20 +50,7 @@ const Home = (): ReactNode => {
           </div>
           <hr className="h-[2px] bg-gray-700" />
           {workspaces.length ? (
-            <InfiniteScroll
-              dataLength={workspaces.length}
-              next={getMoreWorkspaces}
-              hasMore={totalPage > currentPage}
-              loader={
-                <div className="flex justify-center">
-                  <CircularProgress />
-                </div>
-              }
-              scrollThreshold={1}
-              style={{
-                overflow: "visible",
-              }}
-            >
+            <div>
               {workspaces?.map((workspace, index) => {
                 return (
                   <Link to={`/workspace/${workspace._id}`} key={index}>
@@ -78,7 +63,33 @@ const Home = (): ReactNode => {
                   </Link>
                 );
               })}
-            </InfiniteScroll>
+              <div className="flex items-center justify-between">
+                <Button
+                  variant="contained"
+                  disabled={page === 1}
+                  onClick={() =>
+                    setSearchQuery((query) => {
+                      query.set("page", (page - 1).toString() as string);
+                      return query;
+                    })
+                  }
+                >
+                  Previous
+                </Button>
+                <Button
+                  variant="contained"
+                  disabled={page === totalPage}
+                  onClick={() =>
+                    setSearchQuery((query) => {
+                      query.set("page", (page + 1).toString() as string);
+                      return query;
+                    })
+                  }
+                >
+                  Next
+                </Button>
+              </div>
+            </div>
           ) : (
             <div className="text-center font-bold text-xl py-8">
               Nothing to show here!
