@@ -3,14 +3,20 @@ import { useEffect, useState } from "react";
 import enviroment from "../enviroment";
 import { useUserAuthContext } from "../providers/UserAuthProvider";
 import { getErrorMsg } from "../utils/tsError";
-import { WorkspaceFilters, WorkspaceReadOnly } from "../models/workspace";
+import { WorkspaceReadOnly } from "../models/workspace";
+import { useSearchParams } from "react-router-dom";
 
 export const useWorkspaces = () => {
   const { getAccessToken } = useUserAuthContext();
+  const [query, setSearchQuery] = useSearchParams();
+
+  let filter = query.get("filter");
+  filter = filter ? filter : "all";
+
+  let page = <string | number>query.get("page");
+  page = Number(page) || 1;
 
   const [workspaces, setWorkspaces] = useState<WorkspaceReadOnly[]>([]);
-  const [filter, setFilter] = useState<WorkspaceFilters>("all");
-  const [currentPage, setCurrentPage] = useState<number>(1);
   const [totalPage, setTotalPage] = useState<number>(1);
   const [error, setError] = useState<string>("");
 
@@ -21,12 +27,12 @@ export const useWorkspaces = () => {
         const res = await axios.get(`${enviroment.server_url}/workspaces`, {
           params: {
             filter,
+            page,
           },
           headers: { Authorization: `Bearer ${token}` },
         });
 
         setWorkspaces(res.data.workspaces);
-        setCurrentPage(res.data.currentpage);
         setTotalPage(res.data.totalpages);
       } catch (error) {
         setError(getErrorMsg(error));
@@ -34,34 +40,14 @@ export const useWorkspaces = () => {
     };
 
     getWorkspaces();
-  }, [filter, getAccessToken]);
-
-  const getMoreWorkspaces = async () => {
-    try {
-      const token = await getAccessToken();
-      const res = await axios.get(`${enviroment.server_url}/workspaces`, {
-        params: {
-          filter,
-          page: currentPage + 1,
-        },
-        headers: { Authorization: `Bearer ${token}` },
-      });
-
-      setWorkspaces(workspaces?.concat(res.data.workspaces));
-      setCurrentPage(res.data.currentpage);
-      setTotalPage(res.data.totalpages);
-    } catch (error) {
-      setError(getErrorMsg(error));
-    }
-  };
+  }, [filter, page, getAccessToken]);
 
   return {
     workspaces,
-    currentPage,
     totalPage,
+    setSearchQuery,
     filter,
-    setFilter,
-    getMoreWorkspaces,
+    page,
     error,
   };
 };
