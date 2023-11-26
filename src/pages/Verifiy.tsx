@@ -8,23 +8,26 @@ const Verify = () => {
   const [query, _] = useSearchParams();
   const navigate = useNavigate();
   const { getAccessToken } = useUserAuthContext();
-  
-  const state = query.get("state")
-  const code = query.get("code")
-  
+
+  const state = query.get("state");
+  const code = query.get("code");
+
   useEffect(() => {
     const verifyWorkspace = async () => {
       try {
         if (state && code) {
           const token = await getAccessToken();
-          const res = await axios.get(`${enviroment.server_url}/workspaces/${state}/verify`, {
-            params: {
-              code
+          await axios.get(
+            `${enviroment.server_url}/workspaces/${state}/verify`,
+            {
+              params: {
+                code,
+              },
+              headers: { Authorization: `Bearer ${token}` },
             },
-            headers: { Authorization: `Bearer ${token}` },
-          });
+          );
           navigate(`/workspace/${state}`, { replace: true });
-      }
+        }
       } catch (error) {
         console.error();
       }

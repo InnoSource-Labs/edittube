@@ -9,6 +9,7 @@ import { Toaster } from "react-hot-toast";
 import Workspace from "./pages/workspace/Workspace";
 import UploadNewVideo from "./pages/video/UploadNewVideo";
 import Verify from "./pages/Verifiy";
+import Video from "./pages/video/Video";
 
 function App() {
   return (
@@ -47,6 +48,14 @@ function App() {
           element={
             <PrivateRoute>
               <UploadNewVideo />
+            </PrivateRoute>
+          }
+        />
+        <Route
+          path="/workspace/:id/:videoid"
+          element={
+            <PrivateRoute>
+              <Video />
             </PrivateRoute>
           }
         />
