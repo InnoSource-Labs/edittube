@@ -1,7 +1,7 @@
 import React from "react";
 import { useUploadNewVideo } from "../../hooks/useUploadNewVideo";
 import { TextField } from "@mui/material";
-import { LoadingButton } from "@mui/lab"
+import { LoadingButton } from "@mui/lab";
 
 const UploadNewVideo = (): React.ReactNode => {
   const { handleSubmit, title, setTitle, loading, setVideo, desc, setDesc } =
@@ -41,9 +41,15 @@ const UploadNewVideo = (): React.ReactNode => {
         />
         <div className="my-4 border border-gray-300 w-full h-[40px] flex items-center p-4 gap-4 rounded">
           <label htmlFor="video-selector">Video* : </label>
-          <input type="file" id="video-selector" accept="video/*" required onChange={(e) => {
-            e.target.files && setVideo(e.target.files[0])
-          }} />
+          <input
+            type="file"
+            id="video-selector"
+            accept="video/*"
+            required
+            onChange={(e) => {
+              e.target.files && setVideo(e.target.files[0]);
+            }}
+          />
         </div>
         <LoadingButton
           loading={loading}

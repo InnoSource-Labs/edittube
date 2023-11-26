@@ -1,4 +1,3 @@
-import React from "react";
 import { Link } from "react-router-dom";
 import { VideoFilters } from "../../models/video";
 import { FormControl, Select, MenuItem, Button } from "@mui/material";
@@ -29,11 +28,11 @@ const Workspace = (): React.ReactNode => {
           </button>
         </Link>
       ) : workspace?.verifyURL ? (
-        <Link to={workspace.verifyURL}>
+        <a href={workspace.verifyURL}>
           <button className="bg-[#1687A7] text-white mt-4 mb-8 p-2 rounded-md text-md hover:bg-[#176b87ba] transition">
             Verify Workspace
           </button>
-        </Link>
+        </a>
       ) : null}
       <div className="flex items-center justify-center flex-col w-full">
         <div className="flex justify-between items-center w-full">

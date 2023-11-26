@@ -12,7 +12,6 @@ export const useUploadNewVideo = () => {
   const { id } = useParams();
 
   const [loading, setLoading] = useState<boolean>(false);
-  const [error, setError] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
   const [video, setVideo] = useState<File | null>(null);
@@ -38,7 +37,7 @@ export const useUploadNewVideo = () => {
       toast.success("Uploaded new video!");
       return navigate(`/workspace/${id}/${res.data._id}`);
     } catch (error) {
-      setError(getErrorMsg(error));
+      toast.error(getErrorMsg(error));
     } finally {
       setLoading(false);
     }
@@ -47,7 +46,6 @@ export const useUploadNewVideo = () => {
   return {
     handleSubmit,
     loading,
-    error,
     setTitle,
     setDesc,
     video,
