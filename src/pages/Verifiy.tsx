@@ -1,12 +1,15 @@
+import axios from "axios";
+import { useEffect } from "react";
+import toast from "react-hot-toast";
+import enviroment from "../enviroment";
+import { getErrorMsg } from "../utils/tsError";
 import { useNavigate, useSearchParams } from "react-router-dom";
 import { useUserAuthContext } from "../providers/UserAuthProvider";
-import { useEffect } from "react";
-import axios from "axios";
-import enviroment from "../enviroment";
 
 const Verify = () => {
-  const [query, _] = useSearchParams();
   const navigate = useNavigate();
+  const [query] = useSearchParams();
+
   const { getAccessToken } = useUserAuthContext();
 
   const state = query.get("state");
@@ -14,8 +17,8 @@ const Verify = () => {
 
   useEffect(() => {
     const verifyWorkspace = async () => {
-      try {
-        if (state && code) {
+      if (state && code) {
+        try {
           const token = await getAccessToken();
           await axios.get(
             `${enviroment.server_url}/workspaces/${state}/verify`,
@@ -26,12 +29,13 @@ const Verify = () => {
               headers: { Authorization: `Bearer ${token}` },
             },
           );
-          navigate(`/workspace/${state}`, { replace: true });
+        } catch (error) {
+          toast.error(getErrorMsg(error));
         }
-      } catch (error) {
-        console.error();
       }
+      navigate(`/workspace/${state}`, { replace: true });
     };
+
     verifyWorkspace();
   }, [state, code, getAccessToken, navigate]);
 

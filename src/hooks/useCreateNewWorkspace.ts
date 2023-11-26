@@ -15,7 +15,6 @@ export const useCreateNewWorkspace = () => {
   const [name, setName] = useState<string>("");
   const [jsonFile, setJsonFile] = useState<File | null>(null);
   const [editors, setEditors] = useState<editorsInterface[]>([]);
-  const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +40,7 @@ export const useCreateNewWorkspace = () => {
       toast.success("Created new workspace");
       return navigate(`/workspace/${res.data._id}`);
     } catch (error) {
-      setError(getErrorMsg(error));
+      toast.error(getErrorMsg(error));
     } finally {
       setLoading(false);
     }
@@ -49,7 +48,6 @@ export const useCreateNewWorkspace = () => {
 
   return {
     loading,
-    error,
     handleSubmit,
     name,
     jsonFile,

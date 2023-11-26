@@ -13,7 +13,6 @@ export const useVideo = () => {
 
   const navigate = useNavigate();
 
-  const [error, setError] = useState<string>("");
   const [videoData, setVideoData] = useState<VideoInterface>();
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -31,7 +30,7 @@ export const useVideo = () => {
         );
         setVideoData(res.data);
       } catch (error) {
-        setError(getErrorMsg(error));
+        toast.error(getErrorMsg(error));
       }
     };
     getVideoData();
@@ -51,9 +50,9 @@ export const useVideo = () => {
         },
       );
       toast.success("Approved video!");
-      navigate(`/workspace/${id}`);
+      navigate(`/workspace/${id}/videos/${videoid}`, { replace: true });
     } catch (error) {
-      setError(getErrorMsg(error));
+      toast.error(getErrorMsg(error));
     } finally {
       setIsLoading(false);
     }
@@ -73,9 +72,9 @@ export const useVideo = () => {
         },
       );
       toast.success("Rejected video!");
-      navigate(`/workspace/${id}`);
+      navigate(`/workspace/${id}/videos/${videoid}`, { replace: true });
     } catch (error) {
-      setError(getErrorMsg(error));
+      toast.error(getErrorMsg(error));
     } finally {
       setIsLoading(false);
     }
@@ -87,6 +86,5 @@ export const useVideo = () => {
     isLoading,
     handlePublishClick,
     handleRejectClick,
-    error,
   };
 };
