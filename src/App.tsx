@@ -17,7 +17,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Introduction />} />
-        <Route path="/verified" element={<Verify />} />
+        <Route path="/verify" element={<Verify />} />
         <Route
           path="/home"
           element={
