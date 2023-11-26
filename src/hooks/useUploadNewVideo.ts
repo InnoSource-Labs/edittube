@@ -15,7 +15,7 @@ export const useUploadNewVideo = () => {
   const [error, setError] = useState<string>("");
   const [title, setTitle] = useState<string>("");
   const [desc, setDesc] = useState<string>("");
-  const [video, setVideo] = useState<string | File>("");
+  const [video, setVideo] = useState<File | null>(null);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -23,9 +23,10 @@ export const useUploadNewVideo = () => {
     try {
       const token = await getAccessToken();
       const formData = new FormData();
-      formData.append("video", video);
+      video && formData.append("video", video);
       formData.append("title", title);
       formData.append("description", desc);
+
       const res = await axios.post(
         `${enviroment.server_url}/workspaces/${id}/videos`,
         formData,
@@ -33,6 +34,7 @@ export const useUploadNewVideo = () => {
           headers: { Authorization: `Bearer ${token}` },
         },
       );
+
       toast.success("Uploaded new video!");
       return navigate(`/workspace/${id}/${res.data._id}`);
     } catch (error) {

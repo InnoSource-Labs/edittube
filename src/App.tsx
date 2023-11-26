@@ -8,6 +8,7 @@ import CreateNewWorkSpace from "./pages/workspace/CreateNewWorkspace";
 import { Toaster } from "react-hot-toast";
 import Workspace from "./pages/workspace/Workspace";
 import UploadNewVideo from "./pages/video/UploadNewVideo";
+import Verify from "./pages/Verifiy";
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Navbar />
       <Routes>
         <Route path="/" element={<Introduction />} />
+        <Route path="/verified" element={<Verify />} />
         <Route
           path="/home"
           element={
