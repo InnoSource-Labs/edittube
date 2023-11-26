@@ -22,13 +22,19 @@ const Workspace = (): React.ReactNode => {
       <div className="text-3xl font-semibold my-4 truncate w-full text-center">
         {workspace?.name}
       </div>
-      {workspace?.role === "editor" && (
+      {workspace?.role === "editor" ? (
         <Link to={`/workspace/${id}/upload`}>
           <button className="bg-[#1687A7] text-white mt-4 mb-8 p-2 rounded-md text-md hover:bg-[#176b87ba] transition">
             Upload new video
           </button>
         </Link>
-      )}
+      ) : workspace?.verifyURL ? (
+        <Link to={workspace.verifyURL}>
+          <button className="bg-[#1687A7] text-white mt-4 mb-8 p-2 rounded-md text-md hover:bg-[#176b87ba] transition">
+            Verify Workspace
+          </button>
+        </Link>
+      ) : null}
       <div className="flex items-center justify-center flex-col w-full">
         <div className="flex justify-between items-center w-full">
           <div className="font-semibold text-xl text-center">Videos</div>
@@ -56,10 +62,14 @@ const Workspace = (): React.ReactNode => {
           <div className="w-full">
             {videos.map((video, index) => {
               return (
-                <Link to={`/workspace/${id}/${video._id}`} key={index}>
-                  <div className="flex items-center justify-between text-center text-lg font-semibold my-4  h-20 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:bg-gray-200 opacity-90 transition duration-300 rounded">
+                <Link
+                  className="w-full"
+                  to={`/workspace/${id}/${video._id}`}
+                  key={index}
+                >
+                  <div className="w-full flex items-center justify-between text-center text-lg font-semibold my-4 p-4 shadow-[0_3px_10px_rgb(0,0,0,0.2)] hover:bg-gray-200 opacity-90 transition duration-300 rounded">
                     <span className="truncate">{video.title}</span>
-                    <span className="w-20">{video.status.toUpperCase()}</span>
+                    <span className="">{video.status.toUpperCase()}</span>
                   </div>
                 </Link>
               );

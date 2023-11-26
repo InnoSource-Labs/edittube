@@ -11,6 +11,7 @@ import { useState } from "react";
 import enviroment from "../enviroment";
 import * as Realm from "realm-web";
 import { InputLabel } from "@mui/material";
+import { useUserAuthContext } from "../providers/UserAuthProvider";
 
 const Root = styled("div")(
   ({ theme }) => `
@@ -166,6 +167,7 @@ interface Props {
 }
 
 const EditorsSelector: React.FC<Props> = ({ intialVal, onValChange }) => {
+  const { user: loggedInUser } = useUserAuthContext();
   const [options, setOptions] = useState<editorsInterface[]>([]);
 
   async function onInputChange(_: React.SyntheticEvent, value: string) {
@@ -174,8 +176,9 @@ const EditorsSelector: React.FC<Props> = ({ intialVal, onValChange }) => {
       const credentials = Realm.Credentials.anonymous();
       try {
         const user = await app.logIn(credentials);
-        const results = await user.functions.userEmailAutocomplete(value);
-        setOptions(results);
+        const results: editorsInterface[] =
+          await user.functions.userEmailAutocomplete(value);
+        setOptions(results.filter((each) => each.uid !== loggedInUser?.uid));
       } catch (_) {
         setOptions([]);
       }

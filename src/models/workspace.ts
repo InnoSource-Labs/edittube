@@ -6,8 +6,7 @@ export interface editorsInterface {
 }
 
 interface WorkspaceSecrets {
-  clientId: string;
-  clientSecret: string;
+  json: string;
 }
 
 interface WorkspaceCommon {
@@ -27,6 +26,7 @@ interface EditorWorkspace extends WorkspaceCommon {
 
 interface CreatorWorkspace extends WorkspaceInterface {
   role: "creator";
+  verifyURL?: string;
 }
 
 export type WorkspaceReadOnly = EditorWorkspace | CreatorWorkspace;
