@@ -69,32 +69,6 @@ const CreateNewWorkSpace = (): ReactNode => {
             />
           </div>
         </div>
-        {/* <div className="mb-4 w-full">
-          <TextField
-            required
-            id="outlined-required clientId"
-            label="Client ID"
-            size="small"
-            sx={{ width: "100%" }}
-            value={clientId}
-            onChange={(e) => {
-              setClientId(e.target.value);
-            }}
-          />
-        </div>
-        <div className="mb-4 w-full">
-          <TextField
-            required
-            id="outlined-required clientsecret"
-            label="Client Secret"
-            size="small"
-            sx={{ width: "100%" }}
-            value={clientSecret}
-            onChange={(e) => {
-              setClientSecret(e.target.value);
-            }}
-          />
-        </div> */}
         <EditorsSelector intialVal={editors} onValChange={setEditors} />
         <LoadingButton
           loading={loading}
