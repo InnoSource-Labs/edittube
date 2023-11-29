@@ -1,18 +1,28 @@
 import React from "react";
-import enviroment from "../../enviroment";
 import { LoadingButton } from "@mui/lab";
 import { useVideo } from "../../hooks/useVideo";
+import { getCloudinaryTransformedURI, isYouTubeURI } from "../../utils/helper";
 
 const Video = (): React.ReactNode => {
-  const { videoData, user, isLoading, handlePublishClick, handleRejectClick } =
-    useVideo();
+  const {
+    videoData,
+    user,
+    isLoadingState,
+    handlePublishClick,
+    handleRejectClick,
+  } = useVideo();
 
   return (
     <div className="w-[95%] m-auto md:w-[70%] mb-10">
       <div className="font-bold text-2xl underline text-center mb-8">Video</div>
-      {videoData?.status === "pending" && (
+      {videoData?.url && videoData.url !== "deleted" && (
         <iframe
-          src={`https://player.cloudinary.com/embed/?cloud_name=${enviroment.cloudinary_cloud_name}=&public_id=${videoData?.url}&cloudinary%5Bcname%5D=myCname&player%5Bloop%5D=true&source%5Bsource_types%5D%5B0%5D=mp4%2Fh265&source%5Bsource_types%5D%5B1%5D=mp4&source%5Btransformation%5D%5B1%5D%5Bquality%5D=auto`}
+          placeholder=""
+          src={
+            isYouTubeURI(videoData.url)
+              ? videoData.url
+              : getCloudinaryTransformedURI(videoData.url)
+          }
           className="aspect-video mb-4 w-full h-auto"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture;"
           allowFullScreen
@@ -35,7 +45,7 @@ const Video = (): React.ReactNode => {
               variant="contained"
               color="success"
               size="large"
-              loading={isLoading}
+              loading={isLoadingState === "approving"}
               onClick={handlePublishClick}
             >
               Publish
@@ -44,7 +54,7 @@ const Video = (): React.ReactNode => {
               variant="contained"
               color="error"
               size="large"
-              loading={isLoading}
+              loading={isLoadingState === "rejecting"}
               onClick={handleRejectClick}
             >
               Reject
