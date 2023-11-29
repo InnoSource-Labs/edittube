@@ -8,6 +8,6 @@ export function getYouTubeEmbedURI(id: string): string {
   return `https://www.youtube.com/embed/${id}`;
 }
 
-export function getCloudinaryTransformedURI(uri: string): string {
-  return `https://player.cloudinary.com/embed/?cloud_name=${enviroment.cloudinary_cloud_name}=&public_id=${uri}`;
+export function getCloudinaryTransformedURI(publicId: string): string {
+  return `https://player.cloudinary.com/embed/?cloud_name=${enviroment.cloudinary_cloud_name}&public_id=${publicId}`;
 }
