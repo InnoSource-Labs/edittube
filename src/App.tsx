@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { Route, Routes } from "react-router-dom";
 import Introduction from "./pages/Introduction";
 import Navbar from "./components/Navbar";
 import PrivateRoute from "./components/PrivateRoute";
@@ -13,7 +13,7 @@ import Video from "./pages/video/Video";
 
 function App() {
   return (
-    <BrowserRouter>
+    <>
       <Toaster position="top-center" reverseOrder={true} />
       <Navbar />
       <Routes>
@@ -60,7 +60,7 @@ function App() {
           }
         />
       </Routes>
-    </BrowserRouter>
+    </>
   );
 }
 

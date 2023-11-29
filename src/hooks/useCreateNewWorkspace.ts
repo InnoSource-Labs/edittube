@@ -13,7 +13,6 @@ export const useCreateNewWorkspace = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [name, setName] = useState<string>("");
-  const [jsonFile, setJsonFile] = useState<File | null>(null);
   const [editors, setEditors] = useState<editorsInterface[]>([]);
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -22,18 +21,16 @@ export const useCreateNewWorkspace = () => {
 
     try {
       const token = await getAccessToken();
-      const formData = new FormData();
-      jsonFile && formData.append("jsonFile", jsonFile);
-      formData.append("name", name);
-      formData.append("editors", JSON.stringify(editors));
 
       const res = await axios.post(
         `${enviroment.server_url}/workspaces`,
-        formData,
+        {
+          name: name,
+          editors: editors,
+        },
         {
           headers: {
             Authorization: `Bearer ${token}`,
-            "Content-Type": "multipart/form-data",
           },
         },
       );
@@ -50,10 +47,8 @@ export const useCreateNewWorkspace = () => {
     loading,
     handleSubmit,
     name,
-    jsonFile,
     editors,
     setName,
-    setJsonFile,
     setEditors,
   };
 };
