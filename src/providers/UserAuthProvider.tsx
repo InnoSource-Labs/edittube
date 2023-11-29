@@ -5,6 +5,7 @@ import { createContext, useContext, useEffect, useState } from "react";
 import enviroment from "../enviroment";
 import axios from "axios";
 import { getErrorMsg } from "../utils/tsError";
+import { useNavigate } from "react-router-dom";
 
 type ContextProviderProps = {
   children: React.ReactNode;
@@ -34,6 +35,13 @@ export const UserAuthProvider: React.FC<ContextProviderProps> = ({
     getAccessTokenSilently,
     user: auth0User,
   } = useAuth0();
+
+  const navigate = useNavigate();
+  const login = async () => {
+    await loginWithPopup();
+    navigate("/home");
+  };
+
   const [user, setUser] = useState<UserInterface>();
   const [error, setError] = useState<string>();
 
@@ -75,7 +83,7 @@ export const UserAuthProvider: React.FC<ContextProviderProps> = ({
 
   const value: UserAuthContextInterface = {
     logout,
-    login: loginWithPopup,
+    login,
     getAccessToken: getAccessTokenSilently,
     isAuthenticated: isAuthenticated && !!user,
     isLoading,

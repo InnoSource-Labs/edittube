@@ -29,6 +29,7 @@ const Verify = () => {
               headers: { Authorization: `Bearer ${token}` },
             },
           );
+          toast.success("Verified workspace!");
         } catch (error) {
           toast.error(getErrorMsg(error));
         }

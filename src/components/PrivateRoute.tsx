@@ -6,10 +6,10 @@ const PrivateRoute: React.FC<{ children: JSX.Element }> = ({ children }) => {
 
   return isLoading ? (
     <></>
-  ) : !error && isAuthenticated ? (
-    children
-  ) : (
+  ) : error && !isAuthenticated ? (
     <Navigate replace to={{ pathname: "/" }} />
+  ) : (
+    children
   );
 };
 
