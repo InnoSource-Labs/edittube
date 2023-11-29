@@ -25,7 +25,7 @@ const Video = (): React.ReactNode => {
           src={
             isYouTubeURI(videoData.url)
               ? getYouTubeEmbedURI(videoData.publicId)
-              : getCloudinaryTransformedURI(videoData.url)
+              : getCloudinaryTransformedURI(videoData.publicId)
           }
           className="aspect-video mb-4 w-full h-auto"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture;"
