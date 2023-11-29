@@ -1,7 +1,11 @@
 import React from "react";
 import { LoadingButton } from "@mui/lab";
 import { useVideo } from "../../hooks/useVideo";
-import { getCloudinaryTransformedURI, isYouTubeURI } from "../../utils/helper";
+import {
+  getCloudinaryTransformedURI,
+  getYouTubeEmbedURI,
+  isYouTubeURI,
+} from "../../utils/helper";
 
 const Video = (): React.ReactNode => {
   const {
@@ -20,7 +24,7 @@ const Video = (): React.ReactNode => {
           placeholder=""
           src={
             isYouTubeURI(videoData.url)
-              ? videoData.url
+              ? getYouTubeEmbedURI(videoData.publicId)
               : getCloudinaryTransformedURI(videoData.url)
           }
           className="aspect-video mb-4 w-full h-auto"

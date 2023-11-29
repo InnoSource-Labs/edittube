@@ -35,7 +35,7 @@ export const useUploadNewVideo = () => {
       );
 
       toast.success("Uploaded new video!");
-      return navigate(`/workspace/${id}/${res.data._id}`);
+      return navigate(`/workspace/${id}/${res.data._id}`, { replace: true });
     } catch (error) {
       toast.error(getErrorMsg(error));
     } finally {

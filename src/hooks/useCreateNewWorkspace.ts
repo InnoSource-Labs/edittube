@@ -38,7 +38,7 @@ export const useCreateNewWorkspace = () => {
         },
       );
       toast.success("Created new workspace");
-      return navigate(`/workspace/${res.data._id}`);
+      return navigate(`/workspace/${res.data._id}`, { replace: true });
     } catch (error) {
       toast.error(getErrorMsg(error));
     } finally {
