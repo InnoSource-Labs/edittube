@@ -14,7 +14,9 @@ export const useVideo = () => {
   const navigate = useNavigate();
 
   const [videoData, setVideoData] = useState<VideoInterface>();
-  const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [isLoadingState, setIsLoadingState] = useState<
+    "approving" | "rejecting" | "none"
+  >("none");
 
   useEffect(() => {
     const getVideoData = async () => {
@@ -37,7 +39,7 @@ export const useVideo = () => {
   }, [getAccessToken, id, videoid]);
 
   const handlePublishClick = async () => {
-    setIsLoading(true);
+    setIsLoadingState("approving");
     try {
       const token = await getAccessToken();
       await axios.post(
@@ -54,12 +56,12 @@ export const useVideo = () => {
     } catch (error) {
       toast.error(getErrorMsg(error));
     } finally {
-      setIsLoading(false);
+      setIsLoadingState("none");
     }
   };
 
   const handleRejectClick = async () => {
-    setIsLoading(true);
+    setIsLoadingState("rejecting");
     try {
       const token = await getAccessToken();
       await axios.post(
@@ -76,14 +78,14 @@ export const useVideo = () => {
     } catch (error) {
       toast.error(getErrorMsg(error));
     } finally {
-      setIsLoading(false);
+      setIsLoadingState("none");
     }
   };
 
   return {
     videoData,
     user,
-    isLoading,
+    isLoadingState,
     handlePublishClick,
     handleRejectClick,
   };
