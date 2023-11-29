@@ -52,11 +52,11 @@ export const useVideo = () => {
         },
       );
       toast.success("Approved video!");
-      navigate(`/workspace/${id}/videos/${videoid}`, { replace: true });
     } catch (error) {
       toast.error(getErrorMsg(error));
     } finally {
       setIsLoadingState("none");
+      navigate(-1);
     }
   };
 
@@ -74,11 +74,11 @@ export const useVideo = () => {
         },
       );
       toast.success("Rejected video!");
-      navigate(`/workspace/${id}/videos/${videoid}`, { replace: true });
     } catch (error) {
       toast.error(getErrorMsg(error));
     } finally {
       setIsLoadingState("none");
+      navigate(-1);
     }
   };
 
