@@ -16,7 +16,7 @@ const Navbar = (): ReactNode => {
   const { login, logout, isAuthenticated } = useUserAuthContext();
 
   return (
-    <section className="mb-4 sticky top-0 z-50">
+    <section className="mb-4 sticky top-0 z-50 ">
       <CssBaseline />
       <AppBar sx={{ backgroundColor: "#276678" }} position="static">
         <Toolbar className="flex justify-between items-center">
