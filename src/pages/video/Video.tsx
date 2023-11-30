@@ -17,26 +17,25 @@ const Video = (): React.ReactNode => {
   } = useVideo();
 
   return (
-    <div className="w-[95%] m-auto md:w-[70%] mb-10">
-      <div className="font-bold text-2xl underline text-center mb-8">Video</div>
+    <div className="w-[95%] m-auto md:w-[70%] flex flex-col gap-4 mb-4">
+      <div className="font-bold text-2xl underline">Video</div>
       {videoData?.url && videoData.url !== "deleted" && (
         <iframe
-          placeholder=""
           src={
             isYouTubeURI(videoData.url)
               ? getYouTubeEmbedURI(videoData.publicId)
               : getCloudinaryTransformedURI(videoData.publicId)
           }
-          className="aspect-video mb-4 w-full h-auto"
+          className="aspect-video w-full h-auto"
           allow="autoplay; fullscreen; encrypted-media; picture-in-picture;"
           allowFullScreen
         />
       )}
-      <p className="font-semibold text-2xl mb-2">Title: {videoData?.title}</p>
-      <p className="font-medium text-xl mb-2">
+      <p className="font-semibold text-2xl ">Title: {videoData?.title}</p>
+      <p className="font-medium text-xl">
         Description: {videoData?.description}
       </p>
-      <p className="font-medium text-xl mb-10">
+      <p className="font-medium text-xl">
         Status:{" "}
         <span className="bg-fuchsia-600 text-white font-bold rounded p-2">
           {videoData?.status.toUpperCase()}

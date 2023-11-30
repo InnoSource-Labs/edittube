@@ -13,7 +13,7 @@ const CreateNewWorkSpace = (): ReactNode => {
     <div className="flex items-center justify-center m-4">
       <form
         onSubmit={handleSubmit}
-        className="shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-[80%] flex items-center justify-center px-8 py-4 flex-col"
+        className="shadow-[0_3px_10px_rgb(0,0,0,0.2)] w-[500px] flex items-center justify-center px-8 py-4 flex-col"
       >
         <div className="mb-8 font-semibold text-2xl font-sans">
           Create new workspace
