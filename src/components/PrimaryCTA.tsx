@@ -21,7 +21,6 @@ const PrimaryCTA: React.FC<Props> = ({ text, link, onClick }) => {
     <button
       onClick={handleClick}
       className="bg-[#276678] text-white px-4 py-2 rounded-md text-md hover:bg-[#1687A7] transition"
-      disabled={!link && !onClick}
     >
       {text}
     </button>
