@@ -53,7 +53,15 @@ const Workspace = (): React.ReactNode => {
         </div>
         <hr className="h-[2px] bg-gray-700 w-full" />
         {videos?.length ? (
-          <div className="w-full">
+          <div 
+            style={{
+              width: "100%",
+              pointerEvents:
+                workspace?.role === "creator" && workspace?.verifyURL
+                  ? "none"
+                  : "auto",
+            }}
+          >
             {videos.map((video, index) => {
               return (
                 <Link
