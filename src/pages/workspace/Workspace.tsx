@@ -4,6 +4,7 @@ import { FormControl, Select, MenuItem, Button } from "@mui/material";
 import { useWorkspace } from "../../hooks/useWorkspace";
 import { useParams } from "react-router-dom";
 import { useVideos } from "../../hooks/useVideos";
+import PrimaryCTA from "../../components/PrimaryCTA";
 
 const Workspace = (): React.ReactNode => {
   const id = useParams().id;
@@ -22,16 +23,10 @@ const Workspace = (): React.ReactNode => {
         {workspace?.name}
       </div>
       {workspace?.role === "editor" ? (
-        <Link to={`/workspace/${id}/upload`}>
-          <button className="bg-[#1687A7] text-white mt-4 mb-8 p-2 rounded-md text-md hover:bg-[#176b87ba] transition">
-            Upload new video
-          </button>
-        </Link>
+        <PrimaryCTA text="Upload new video" link={`/workspace/${id}/upload`} />
       ) : workspace?.verifyURL ? (
         <a href={workspace.verifyURL}>
-          <button className="bg-[#1687A7] text-white mt-4 mb-8 p-2 rounded-md text-md hover:bg-[#176b87ba] transition">
-            Verify Workspace
-          </button>
+          <PrimaryCTA text="Verify Workspace" />
         </a>
       ) : null}
       <div className="flex items-center justify-center flex-col w-full">
