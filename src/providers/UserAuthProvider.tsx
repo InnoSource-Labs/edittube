@@ -28,7 +28,7 @@ export const UserAuthProvider: React.FC<ContextProviderProps> = ({
 }) => {
   const {
     loginWithPopup,
-    logout,
+    logout: logoutAuth0,
     isAuthenticated,
     isLoading,
     error: auth0Error,
@@ -37,13 +37,17 @@ export const UserAuthProvider: React.FC<ContextProviderProps> = ({
   } = useAuth0();
 
   const navigate = useNavigate();
+  const [user, setUser] = useState<UserInterface>();
+  const [error, setError] = useState<string>();
+
   const login = async () => {
     await loginWithPopup();
     navigate("/home");
   };
-
-  const [user, setUser] = useState<UserInterface>();
-  const [error, setError] = useState<string>();
+  const logout = async () => {
+    await logoutAuth0();
+    navigate("/");
+  };
 
   useEffect(() => {
     if (auth0Error?.message) {
@@ -82,8 +86,8 @@ export const UserAuthProvider: React.FC<ContextProviderProps> = ({
   }, [auth0User, getAccessTokenSilently]);
 
   const value: UserAuthContextInterface = {
-    logout,
     login,
+    logout,
     getAccessToken: getAccessTokenSilently,
     isAuthenticated: isAuthenticated && !!user,
     isLoading,
