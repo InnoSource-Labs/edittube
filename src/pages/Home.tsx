@@ -1,8 +1,9 @@
 import { Button, FormControl, MenuItem, Select } from "@mui/material";
 import { ReactNode } from "react";
-import { Link } from "react-router-dom";
 import { WorkspaceFilters } from "../models/workspace";
 import { useWorkspaces } from "../hooks/useWorkspaces";
+import PrimaryCTA from "../components/PrimaryCTA";
+import { Link } from "react-router-dom";
 
 const Home = (): ReactNode => {
   const { workspaces, filter, setSearchQuery, page, totalPage } =
@@ -11,11 +12,7 @@ const Home = (): ReactNode => {
   return (
     <div className="md:w-[80%] w-[95%] m-auto font-sans">
       <div className="flex justify-center items-center flex-col mb-8">
-        <Link to="/workspace/new">
-          <button className="bg-[#1687A7] text-white p-2 rounded-md text-md hover:bg-[#176b87ba] transition">
-            Create new workspace
-          </button>
-        </Link>
+        <PrimaryCTA text="Create new workspace" link={`/workspace/new`} />
         <div className="flex items-center justify-center w-80">
           <hr className="flex-1 h-px my-6 border-0 bg-gray-700" />
           <span className="px-3 font-medium text-gray-900 ">or</span>
