@@ -2,16 +2,14 @@ import { ReactNode } from "react";
 import {
   AppBar,
   Toolbar,
-  IconButton,
-  Typography,
   Stack,
   Button,
   CssBaseline,
   Avatar,
 } from "@mui/material";
-import VideoLibraryIcon from "@mui/icons-material/VideoLibrary";
 import { useUserAuthContext } from "../providers/UserAuthProvider";
 import { Link } from "react-router-dom";
+import LogoSvg from "../svg/LogoSvg";
 
 const Navbar = (): ReactNode => {
   const { login, logout, isAuthenticated, user } = useUserAuthContext();
@@ -22,17 +20,7 @@ const Navbar = (): ReactNode => {
       <AppBar sx={{ backgroundColor: "#276678" }} position="static">
         <Toolbar className="flex justify-between items-center">
           <Link to="/home" className="flex items-center">
-            <IconButton
-              size="large"
-              edge="start"
-              color="inherit"
-              aria-label="logo"
-            >
-              <VideoLibraryIcon />
-            </IconButton>
-            <Typography variant="h6" component="div">
-              EditTube
-            </Typography>
+            <LogoSvg />
           </Link>
           <Stack direction="row" spacing={2}>
             <Avatar alt={user?.name} src={user?.picture} />
